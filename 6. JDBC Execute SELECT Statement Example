@@ -1,0 +1,55 @@
+The following code snippet queries all records from the Users table and print out details for each record:
+
+String sql = "SELECT * FROM Users";
+ 
+Statement statement = conn.createStatement();
+ResultSet result = statement.executeQuery(sql);
+ 
+int count = 0;
+ 
+while (result.next()){
+    String name = result.getString(2);
+    String pass = result.getString(3);
+    String fullname = result.getString("fullname");
+    String email = result.getString("email");
+ 
+    String output = "User #%d: %s - %s - %s - %s";
+    System.out.println(String.format(output, ++count, name, pass, fullname, email));
+}
+
+
+
+Output:
+
+User #1: bill - secretpass - Bill Gates - bill.gates@microsoft.com
+
+
+Because the SQL SELECT query here is static so we just create a Statement object from the connection. 
+The while loop iterates over the rows contained in the result set by repeatedly checking return value of the ResultSet’s next() method. 
+The next() method moves a cursor forward in the result set to check if there is any remaining record. 
+For each iteration, the result set contains data for the current row, and we use the ResultSet’s getXXX(column index/column name) 
+method to retrieve value of a specific column in the current row, for example this statement:
+
+	
+String name = result.getString(2);
+
+
+
+Retrieves value of the second column in the current row, which is the username field. 
+The value is casted to a String because we know that the username field is of type VARCHAR based on the database schema mentioned previously. 
+Keep in mind that the column index here is 1-based, the first column will be at index 1, the second at index 2, and so on.
+If you are not sure or don’t know exactly the index of column, so passing a column name would be useful:
+
+String fullname = result.getString("fullname");
+
+For other data types, the ResultSet provide appropriate getter methods:
+
+* getString()
+* getInt()
+* getFloat()
+* getDate()
+* getTimestamp()
+* …
+
+
+TIPS: Accessing column’s value by column index would provide faster performance then column name.
