@@ -1,0 +1,44 @@
+2. Creating a sample MySQL database
+Let’s create a MySQL database called SampleDB with one table Users with the following structure:
+
+
+-----------------------------------------------------------------------------------------
+| cilumn name     |    Datatype     |  PK|   NN |   UQ |  BIN| UN |  ZF|  AI|   Dafault | 
+----------------------------------------------------------------------------------------| 
+| user_id         |     INT(11)     |  * |  *   |      |     |    |    |  * |           | 
+| username        |     VARCHAR(45) |    |   *  |      |     |    |    |    |           | 
+| password        |     VARCHAR(45) |    |   *  |      |     |    |    |    |           | 
+| fullname        |      VARCHAR(45)|    |   *  |      |     |    |    |    |           | 
+| email           |    VARCHAR(45)  |    |  *   |      |     |    |    |    |           | 
+-----------------------------------------------------------------------------------------
+  
+
+
+
+Execute the following SQL script inside MySQL Workbench:
+create database SampleDB;
+ 
+use SampleDB;
+ 
+CREATE TABLE `users` (
+    `user_id` int(11) NOT NULL AUTO_INCREMENT,
+    `username` varchar(45) NOT NULL,
+    `password` varchar(45) NOT NULL,
+    `fullname` varchar(45) NOT NULL,
+    `email` varchar(45) NOT NULL,
+    PRIMARY KEY (`user_id`)
+);
+
+Or if you are using MySQL Command Line Client program, save the above script into a file, let’s say, SQLScript.sqland execute the following command:
+source Path\To\The\Script\File\SQLScript.sql
+
+Here’s an example screenshot taken while executing the above script in MySQL Command Line Client program:
+---------------------------------------
+MySQL5.5 Command Line Client
+mysql>source e:/Java/JDBS\SQLScript.sql
+Query OK, 1 row affected <0.00 sec>
+
+Database changed
+Query OK, 1 row affected <0.26 sec>
+mysql>
+---------------------------------------
