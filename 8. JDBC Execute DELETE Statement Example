@@ -1,0 +1,20 @@
+The following code snippet will delete a record whose username field contains “bill”:
+
+
+String sql = "DELETE FROM Users WHERE username=?";
+ 
+PreparedStatement statement = conn.prepareStatement(sql);
+statement.setString(1, "bill");
+ 
+int rowsDeleted = statement.executeUpdate();
+if (rowsDeleted > 0) {
+    System.out.println("A user was deleted successfully!");
+}
+
+So far we have one through some examples demonstrating how to use JDBC API to execute SQL INSERT, SELECT, UPDATE and DELETE statements. The key points to remember are:
+Using a Statement for a static SQL query.
+Using a PreparedStatement for a parameterized SQL query and using setXXX() methods to set values for the parameters.
+Using execute() method to execute general query.
+Using executeUpdate() method to execute INSERT, UPDATE or DELETE query
+Using executeQuery() method to execute SELECT query.
+Using a ResultSet to iterate over rows returned from a SELECT query, using its next() method to advance to next row in the result set, and using getXXX() methods to retrieve values of columns.
